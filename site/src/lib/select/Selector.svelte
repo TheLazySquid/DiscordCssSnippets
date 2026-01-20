@@ -4,7 +4,7 @@
     import ClipboardCopy from "@lucide/svelte/icons/clipboard-copy";
     import Eye from "@lucide/svelte/icons/eye";
     import toast, { Toaster } from "svelte-french-toast";
-    import Preview from "./Preview.svelte";
+    import Preview from "./CssPreview.svelte";
 
     let { snippets }: { snippets: Snippet[] } = $props();
     
@@ -35,7 +35,7 @@
     
     function showPreview() {
         if(enabledSnippets.length === 0) {
-            toast.error("No snippets selected to copy.");
+            toast.error("No snippets are selected.");
             return;
         }
 
@@ -49,7 +49,7 @@
 <div class="flex flex-col items-center">
     <div class="flex gap-2 h-screen items-start" style="width: min(1200px, 90%)">
         <div class="grid gap-4 grow overflow-y-auto max-h-full py-3 pr-2"
-            style="grid-template-columns: repeat(auto-fit, minmax(240px, 1fr))">
+            style="grid-template-columns: repeat(auto-fit, minmax(320px, 1fr))">
             {#each snippets as snippet}
                 <Item {snippet} bind:enabled={enabled[snippet.name]} />
             {/each}

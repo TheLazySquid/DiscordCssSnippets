@@ -1,7 +1,6 @@
 ---
 import Layout from "$lib/Layout.astro";
 import { getSnippetNames, readSnippet } from "$lib/util";
-import { Image } from "astro:assets";
 
 export async function getStaticPaths() {
     const snippets = await getSnippetNames();
@@ -10,10 +9,6 @@ export async function getStaticPaths() {
 
 const { name } = Astro.params;
 const snippet = await readSnippet(name);
-
-// Hacky way to load the image without having it actually in the project
-let image: Promise<any> | null = null;
-if(snippet.preview) image = import(`../../../../snippets/${snippet.name}/${snippet.preview}.png`);
 ---
 
 <Layout title={snippet.name} description={snippet.description[0]}>
@@ -28,7 +23,10 @@ if(snippet.preview) image = import(`../../../../snippets/${snippet.name}/${snipp
             {snippet.description.map((line) => (
                 <p class="mb-2">{line}</p>
             ))}
-            {image && <Image src={image} alt={`A preview of ${snippet.name}`} />}
+            {snippet.preview && <img
+                src={`/previews/${snippet.name}/${snippet.preview}`}
+                alt={`A preview of ${snippet.name}`}
+            />}
         </div>
     </div>
 </Layout>
