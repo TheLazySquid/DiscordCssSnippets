@@ -5,6 +5,7 @@
     import Eye from "@lucide/svelte/icons/eye";
     import toast, { Toaster } from "svelte-french-toast";
     import Preview from "./CssPreview.svelte";
+    import { siteUrl } from "$lib/consts";
 
     let { snippets }: { snippets: Snippet[] } = $props();
     
@@ -18,7 +19,7 @@
     function getCss() {
         return enabledSnippets.map(s => (
             `/* ${s.name} by ${s.author} */\n` +
-            `@import url(https://raw.githubusercontent.com/TheLazySquid/DiscordCssSnippets/main/snippets/${s.name}/index.css);`
+            `@import url(${siteUrl}snippets/${s.name}.css);`
         )).join("\n");
     }
 

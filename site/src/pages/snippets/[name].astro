@@ -1,6 +1,7 @@
 ---
 import Layout from "$lib/Layout.astro";
 import { getSnippetNames, readSnippet } from "$lib/util";
+import { baseUrl } from "$lib/consts";
 
 export async function getStaticPaths() {
     const snippets = await getSnippetNames();
@@ -24,7 +25,7 @@ const snippet = await readSnippet(name);
                 <p class="mb-2">{line}</p>
             ))}
             {snippet.preview && <img
-                src={`/previews/${snippet.name}/${snippet.preview}`}
+                src={`${baseUrl}previews/${snippet.name}/${snippet.preview}`}
                 alt={`A preview of ${snippet.name}`}
             />}
         </div>

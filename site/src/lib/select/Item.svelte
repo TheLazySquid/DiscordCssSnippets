@@ -1,4 +1,5 @@
 <script lang="ts">
+    import { baseUrl } from "$lib/consts";
     import type { Snippet } from "$lib/types";
     import Check from "@lucide/svelte/icons/check";
     import ChevronDown from "@lucide/svelte/icons/chevron-down";
@@ -29,7 +30,7 @@
     {#if snippet.preview}
         <img
             class="mb-2"
-            src={`/previews/${snippet.name}/${snippet.preview}`}
+            src={`${baseUrl}previews/${snippet.name}/${snippet.preview}`}
             alt={`A preview of ${snippet.name}`}
         />
     {/if}
