@@ -1,0 +1,11 @@
+---
+import { readSnippets } from "$lib/util";
+import Selector from "$lib/select/Selector.svelte";
+import Layout from "$lib/Layout.astro";
+
+const snippets = await readSnippets();
+---
+
+<Layout title="Discord CSS Snippets" description="A collection of css snippets to alter Discord's UI">
+    <Selector client:only="svelte" snippets={snippets} />
+</Layout>

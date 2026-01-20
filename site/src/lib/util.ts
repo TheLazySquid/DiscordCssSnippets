@@ -1,14 +1,8 @@
 import { readdir, readFile } from "node:fs/promises";
 import { join } from "node:path";
+import type { Snippet } from "./types";
 
 export const snippetsDir = join(import.meta.dirname, "..", "..", "..", "snippets");
-
-interface Snippet {
-    name: string;
-    author: string;
-    description: string[];
-    preview?: string;
-}
 
 export function getSnippetNames() {
     return readdir(snippetsDir);

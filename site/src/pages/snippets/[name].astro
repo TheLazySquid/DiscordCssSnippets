@@ -1,6 +1,6 @@
 ---
-import "../../styles/global.css";
-import { getSnippetNames, readSnippet } from "../../lib/util";
+import Layout from "$lib/Layout.astro";
+import { getSnippetNames, readSnippet } from "$lib/util";
 import { Image } from "astro:assets";
 
 export async function getStaticPaths() {
@@ -16,17 +16,19 @@ let image: Promise<any> | null = null;
 if(snippet.preview) image = import(`../../../../snippets/${snippet.name}/${snippet.preview}.png`);
 ---
 
-<div class="flex flex-col items-center pt-3">
-    <div class="bg-foreground rounded-lg p-4" style="width: min(720px, 90%)">
-        <div class="text-4xl font-bold mb-2 border-b border-gray-400">
-            {snippet.name}
+<Layout title={snippet.name} description={snippet.description[0]}>
+    <div class="flex flex-col items-center pt-3">
+        <div class="bg-foreground rounded-lg p-4" style="width: min(720px, 90%)">
+            <div class="text-4xl font-bold mb-2 border-b border-gray-400">
+                {snippet.name}
+            </div>
+            <div class="text-sm mb-4">
+                By {snippet.author}
+            </div>
+            {snippet.description.map((line) => (
+                <p class="mb-2">{line}</p>
+            ))}
+            {image && <Image src={image} alt={`A preview of ${snippet.name}`} />}
         </div>
-        <div class="text-sm mb-4">
-            By {snippet.author}
-        </div>
-        {snippet.description.map((line) => (
-            <p class="mb-2">{line}</p>
-        ))}
-        {image && <Image src={image} alt={`A preview of ${snippet.name}`} />}
     </div>
-</div>
+</Layout>
