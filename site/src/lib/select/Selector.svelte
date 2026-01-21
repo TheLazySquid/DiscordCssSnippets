@@ -19,7 +19,7 @@
     function getCss() {
         return enabledSnippets.map(s => (
             `/* ${s.name} by ${s.author} */\n` +
-            `@import url(${siteUrl}snippets/${s.name}.css);`
+            `@import url(${siteUrl}css/${s.name}.css);`
         )).join("\n");
     }
 
