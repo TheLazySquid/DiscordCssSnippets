@@ -1,5 +1,6 @@
 ---
 import "../styles/global.css";
+import { baseUrl } from "./consts";
 
 interface Props {
     title: string;
@@ -12,6 +13,7 @@ const { title, description } = Astro.props;
 <html>
     <head>
         <title>{title}</title>
+        <link rel="icon" href={`${baseUrl}favicon.png`} />
         <meta name="og:title" content={title} />
         <meta name="og:description" content={description} />
     </head>
