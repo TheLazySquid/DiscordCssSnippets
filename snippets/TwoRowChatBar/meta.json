@@ -1,0 +1,9 @@
+{
+    "author": "dav",
+    "description": [
+        "For those who may want the two-row chat bar layout in the event the visual refresh exp. gets removed.",
+        "Accessory bar height adjusts based on UI Density option.",
+        "Gif and Sticker buttons do not appear in the HTML with this snippet on."
+    ],
+    "preview": "preview.png"
+}

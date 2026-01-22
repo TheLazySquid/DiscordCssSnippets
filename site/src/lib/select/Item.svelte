@@ -1,5 +1,6 @@
 <script lang="ts">
     import { baseUrl } from "$lib/consts";
+    import { modalState } from "$lib/modals/state.svelte";
     import type { Snippet } from "$lib/types";
     import Check from "@lucide/svelte/icons/check";
     import ChevronDown from "@lucide/svelte/icons/chevron-down";
@@ -28,11 +29,23 @@
         By {snippet.author}
     </div>
     {#if snippet.preview}
-        <img
-            class="mb-2"
-            src={`${baseUrl}previews/${snippet.name}/${snippet.preview}`}
-            alt={`A preview of ${snippet.name}`}
-        />
+        <button onclick={() => modalState.preview = snippet}>
+            {#if snippet.preview.endsWith(".mp4")}
+                <video
+                    class="mb-2 max-h-35 cursor-pointer"
+                    src={`${baseUrl}previews/${snippet.name}/${snippet.preview}`}
+                    autoplay
+                    loop
+                    muted
+                ></video>
+            {:else}
+                <img
+                    class="mb-2 max-h-35 cursor-pointer"
+                    src={`${baseUrl}previews/${snippet.name}/${snippet.preview}`}
+                    alt={`A preview of ${snippet.name}`}
+                />
+            {/if}
+        </button>
     {/if}
     <div class="flex items-end">
         {#if expanded}

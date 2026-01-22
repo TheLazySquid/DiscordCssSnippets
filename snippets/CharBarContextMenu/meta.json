@@ -1,0 +1,8 @@
+{
+    "author": "dav",
+    "description": [
+        "Places the right set of buttons in the chat area in a context menu.",
+        "A reload may be required upon pasting."
+    ],
+    "preview": "preview.png"
+}

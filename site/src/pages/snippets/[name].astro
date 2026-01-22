@@ -24,10 +24,21 @@ const snippet = await readSnippet(name);
             {snippet.description.map((line) => (
                 <p class="mb-2">{line}</p>
             ))}
-            {snippet.preview && <img
-                src={`${baseUrl}previews/${snippet.name}/${snippet.preview}`}
-                alt={`A preview of ${snippet.name}`}
-            />}
+            {snippet.preview && (
+                snippet.preview.endsWith(".mp4") ? (
+                    <video
+                        src={`${baseUrl}previews/${snippet.name}/${snippet.preview}`}
+                        autoplay 
+                        loop
+                        muted
+                    ></video>
+                ) : (
+                    <img
+                        src={`${baseUrl}previews/${snippet.name}/${snippet.preview}`}
+                        alt={`A preview of ${snippet.name}`}
+                    />
+                )
+            )}
         </div>
     </div>
 </Layout>

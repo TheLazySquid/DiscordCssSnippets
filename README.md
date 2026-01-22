@@ -1,7 +1,7 @@
 # Discord CSS Snippets
 
 > [!WARNING]
-> This project has yet to be populated with snippets- for now it's more of a proof of concept.
+> This project is still being populated with snippets- for now it's more of a proof of concept.
 
 This is a collection of CSS snippets that alter the way Discord looks in relatively small ways. If you're looking for full themes that overhaul Discord's appearance, you'll want to go to [BetterDiscord Themes](https://betterdiscord.app/themes) (which also work on Vencord etc).
 

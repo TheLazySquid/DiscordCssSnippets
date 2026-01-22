@@ -1,0 +1,10 @@
+{
+    "author": "dav",
+    "description": [
+        "Small redesign to the page swapper in search results",
+        "New button design following the mana design style",
+        "Now always visible at the bottom of the screen instead of having to scroll",
+        "Aligned with user panels and chat bar at the bottom of the screen"
+    ],
+    "preview": "preview.png"
+}

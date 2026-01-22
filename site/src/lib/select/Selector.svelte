@@ -4,8 +4,10 @@
     import ClipboardCopy from "@lucide/svelte/icons/clipboard-copy";
     import Eye from "@lucide/svelte/icons/eye";
     import toast, { Toaster } from "svelte-french-toast";
-    import Preview from "./CssPreview.svelte";
     import { siteUrl } from "$lib/consts";
+    import Css from "$lib/modals/Css.svelte";
+    import { modalState } from "$lib/modals/state.svelte";
+    import Preview from "$lib/modals/Preview.svelte";
 
     let { snippets }: { snippets: Snippet[] } = $props();
     
@@ -14,7 +16,6 @@
     $effect(() => { localStorage.enabledSnippets = JSON.stringify(enabled) });
 
     let enabledSnippets = $derived(snippets.filter(s => enabled[s.name]));
-    let preview: Preview;
 
     function getCss() {
         return enabledSnippets.map(s => (
@@ -40,15 +41,16 @@
             return;
         }
 
-        preview.show(getCss());
+        modalState.css = getCss();
     }
 </script>
 
-<Preview bind:this={preview} />
+<Css />
+<Preview />
 <Toaster position="bottom-right" toastOptions={{ className: "toast" }} />
 
 <div class="flex flex-col items-center">
-    <div class="flex gap-2 h-screen items-start" style="width: min(1200px, 90%)">
+    <div class="flex gap-2 h-screen items-start" style="width: min(1400px, 90%)">
         <div class="grid gap-4 grow overflow-y-auto max-h-full py-3 pr-2"
             style="grid-template-columns: repeat(auto-fit, minmax(320px, 1fr))">
             {#each snippets as snippet}
