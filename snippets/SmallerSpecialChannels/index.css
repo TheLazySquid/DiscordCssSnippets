@@ -1,0 +1,7 @@
+._658442d9ffa4221c-content > ._2ea32c412048f708-name {
+    display: none;
+}
+
+.d125d22cdfd32cfe-content > :has(._658442d9ffa4221c-content) {
+    display: inline-block;
+}
