@@ -20,4 +20,5 @@
             <ClipboardCopy class="text-gray-300" size={20} />
         </button>
     </div>
+    <pre class="bg-background p-2 rounded-sm overflow-x-auto">{modalState.css}</pre>
 </Modal>

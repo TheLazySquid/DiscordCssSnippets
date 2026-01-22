@@ -43,6 +43,12 @@
 
         modalState.css = getCss();
     }
+
+    function enableAll() {
+        for(const snippet of snippets) {
+            enabled[snippet.name] = true;
+        }
+    }
 </script>
 
 <Css />
@@ -58,31 +64,41 @@
             {/each}
         </div>
         <div class="w-px h-full bg-gray-500 mr-2"></div>
-        <div class="rounded-md bg-foreground p-4 w-75 mt-3">
-            <h2 class="text-2xl font-bold mb-2 border-b border-gray-400">Selected Snippets</h2>
-            <div class="bg-background rounded-sm p-4 overflow-y-auto max-h-80">
-                {#if enabledSnippets.length === 0}
-                    <p class="text-gray-400">No snippets selected.</p>
-                {/if}
-                {#each enabledSnippets as snippet}
-                    <p>{snippet.name}</p>
-                {/each}
+        <div>
+            <div class="rounded-md bg-foreground p-4 w-75 mt-3">
+                <h2 class="text-2xl font-bold mb-2 border-b border-gray-400">Selected Snippets</h2>
+                <div class="bg-background rounded-sm p-4 overflow-y-auto max-h-80">
+                    {#if enabledSnippets.length === 0}
+                        <p class="text-gray-400">No snippets selected.</p>
+                    {/if}
+                    {#each enabledSnippets as snippet}
+                        <p>{snippet.name}</p>
+                    {/each}
+                </div>
+                <div class="h-7 mt-1">
+                    {#if enabledSnippets.length === 1}
+                        1 snippet selected
+                    {:else if enabledSnippets.length > 1}
+                        {enabledSnippets.length} snippets selected
+                    {/if}
+                </div>
+                <button onclick={copy} title="Copy css to clipboard"
+                    class="bg-background rounded-sm p-2">
+                    <ClipboardCopy size={20} />
+                </button>
+                <button onclick={showPreview} title="View css"
+                    class="bg-background rounded-sm p-2">
+                    <Eye size={20} />
+                </button>
             </div>
-            <div class="h-7 mt-1">
-                {#if enabledSnippets.length === 1}
-                    1 snippet selected
-                {:else if enabledSnippets.length > 1}
-                    {enabledSnippets.length} snippets selected
-                {/if}
+            <div class="flex mt-3 gap-3">
+                <button class="bg-foreground rounded-sm p-2" onclick={enableAll}>
+                    Select All
+                </button>
+                <button class="bg-foreground rounded-sm p-2" onclick={() => enabled = {}}>
+                    Deselect All
+                </button>
             </div>
-            <button onclick={copy} title="Copy css to clipboard"
-                class="bg-background rounded-sm p-2">
-                <ClipboardCopy size={20} />
-            </button>
-            <button onclick={showPreview} title="View css"
-                class="bg-background rounded-sm p-2">
-                <Eye size={20} />
-            </button>
         </div>
     </div>
 </div>
