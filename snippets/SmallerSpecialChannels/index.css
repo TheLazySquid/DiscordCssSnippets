@@ -1,7 +1,7 @@
-._658442d9ffa4221c-content > ._2ea32c412048f708-name {
+.content__65844 > .name__2ea32 {
     display: none;
 }
 
-.d125d22cdfd32cfe-content > :has(._658442d9ffa4221c-content) {
+.content_d125d2 > :has(.content__65844) {
     display: inline-block;
 }
