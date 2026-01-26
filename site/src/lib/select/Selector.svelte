@@ -13,9 +13,11 @@
     
     const storedEnabled = localStorage.enabledSnippets || "{}";
     let enabled: Record<string, boolean> = $state(JSON.parse(storedEnabled));
-    $effect(() => { localStorage.enabledSnippets = JSON.stringify(enabled) });
-
+    let search = $state("");
     let enabledSnippets = $derived(snippets.filter(s => enabled[s.name]));
+    let shownSnippets = $derived(snippets.filter(s => s.name.toLowerCase().includes(search.toLowerCase())));
+    
+    $effect(() => { localStorage.enabledSnippets = JSON.stringify(enabled) });
 
     function getCss() {
         return enabledSnippets.map(s => (
@@ -59,7 +61,10 @@
     <div class="flex gap-2 h-screen items-start" style="width: min(1400px, 90%)">
         <div class="grid gap-4 grow overflow-y-auto max-h-full py-3 pr-2"
             style="grid-template-columns: repeat(auto-fit, minmax(320px, 1fr))">
-            {#each snippets as snippet}
+            {#if shownSnippets.length === 0}
+                <h2 class="text-2xl font-bold text-center">No snippets match your search</h2>
+            {/if}
+            {#each shownSnippets as snippet}
                 <Item {snippet} bind:enabled={enabled[snippet.name]} />
             {/each}
         </div>
@@ -90,6 +95,9 @@
                     class="bg-background rounded-sm p-2">
                     <Eye size={20} />
                 </button>
+            </div>
+            <div class="bg-foreground rounded-md mt-3 p-2">
+                <input bind:value={search} placeholder="Search snippets" class="outline-none" />
             </div>
             <div class="flex mt-3 gap-3">
                 <button class="bg-foreground rounded-sm p-2" onclick={enableAll}>
