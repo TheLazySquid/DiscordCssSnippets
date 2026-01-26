@@ -1,4 +1,5 @@
 {
     "author": "TheLazySquid",
-    "description": "Removes the effects that appear when you click on Nitro users' profiles"
+    "description": "Removes the effects that appear when you click on Nitro users' profiles",
+    "type": "declutter"
 }

@@ -5,5 +5,6 @@
         "Accessory bar height adjusts based on UI Density option.",
         "Gif and Sticker buttons do not appear in the HTML with this snippet on."
     ],
+    "type": "improvement",
     "preview": "preview.png"
 }

@@ -1,22 +1,43 @@
 <script lang="ts">
-    import type { Snippet } from "../types";
+    import type { Category, Snippet } from "../types";
     import Item from "./Item.svelte";
     import ClipboardCopy from "@lucide/svelte/icons/clipboard-copy";
     import Eye from "@lucide/svelte/icons/eye";
     import toast, { Toaster } from "svelte-french-toast";
-    import { siteUrl } from "$lib/consts";
+    import { categoryNames, siteUrl } from "$lib/consts";
     import Css from "$lib/modals/Css.svelte";
     import { modalState } from "$lib/modals/state.svelte";
     import Preview from "$lib/modals/Preview.svelte";
 
-    let { snippets }: { snippets: Snippet[] } = $props();
+    interface Props {
+        categories: Category[];
+        snippets: Snippet[];
+    }
+
+    let { categories, snippets }: Props = $props();
     
     const storedEnabled = localStorage.enabledSnippets || "{}";
     let enabled: Record<string, boolean> = $state(JSON.parse(storedEnabled));
     let search = $state("");
     let enabledSnippets = $derived(snippets.filter(s => enabled[s.name]));
-    let shownSnippets = $derived(snippets.filter(s => s.name.toLowerCase().includes(search.toLowerCase())));
-    
+    let shownCategories = $derived.by(() => {
+        const searched = search.toLowerCase();
+        if(searched === "") return categories;
+
+        // Show categories that have at least one snippet matching the search
+        const newCategories: Category[] = [];
+        for(const category of categories) {
+            const filtered = category.snippets.filter(s => (
+                s.name.toLowerCase().includes(searched)
+            ));
+
+            if(filtered.length === 0) continue;
+            newCategories.push({ type: category.type, snippets: filtered });
+        }
+
+        return newCategories;
+    });
+
     $effect(() => { localStorage.enabledSnippets = JSON.stringify(enabled) });
 
     function getCss() {
@@ -59,13 +80,20 @@
 
 <div class="flex flex-col items-center">
     <div class="flex gap-2 h-screen items-start" style="width: min(1400px, 90%)">
-        <div class="grid gap-4 grow overflow-y-auto max-h-full py-3 pr-2"
-            style="grid-template-columns: repeat(auto-fit, minmax(320px, 1fr))">
-            {#if shownSnippets.length === 0}
+        <div class="overflow-y-auto max-h-full py-3 grow">
+            {#if shownCategories.length === 0}
                 <h2 class="text-2xl font-bold text-center">No snippets match your search</h2>
             {/if}
-            {#each shownSnippets as snippet}
-                <Item {snippet} bind:enabled={enabled[snippet.name]} />
+            {#each shownCategories as category}
+                <h2 class="text-3xl font-bold border-b">
+                    {categoryNames[category.type]}
+                </h2>
+                <div class="grid gap-4 py-3 pr-2"
+                    style="grid-template-columns: repeat(auto-fill, minmax(320px, 1fr))">
+                    {#each category.snippets as snippet}
+                        <Item {snippet} bind:enabled={enabled[snippet.name]} />
+                    {/each}
+                </div>
             {/each}
         </div>
         <div class="w-px h-full bg-gray-500 mr-2"></div>

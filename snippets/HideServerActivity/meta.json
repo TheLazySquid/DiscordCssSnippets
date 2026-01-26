@@ -3,5 +3,6 @@
     "description": [
         "Hides the activity section at the top of the members list in servers."
     ],
+    "type": "declutter",
     "preview": "preview.png"
 }

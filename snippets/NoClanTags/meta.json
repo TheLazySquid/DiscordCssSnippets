@@ -1,4 +1,5 @@
 {
     "author": "TheLazySquid",
-    "description": "Hides clan tags that would otherwise appear next to usernames"
+    "description": "Hides clan tags that would otherwise appear next to usernames",
+    "type": "declutter"
 }

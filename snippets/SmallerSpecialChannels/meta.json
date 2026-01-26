@@ -3,5 +3,6 @@
     "description": [
         "Makes special channels such as the server guide or channel browser smaller"
     ],
+    "type": "declutter",
     "preview": "preview.png"
 }

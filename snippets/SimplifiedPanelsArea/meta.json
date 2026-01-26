@@ -3,5 +3,6 @@
     "description": [
         "Alternate layout that hides panel buttons to offer more room for other content."
     ],
+    "type": "improvement",
     "preview": "preview.mp4"
 }

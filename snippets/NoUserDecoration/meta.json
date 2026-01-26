@@ -1,4 +1,5 @@
 {
     "author": "TheLazySquid",
-    "description": "Hides the decorations some users have around their profile picture"
+    "description": "Hides the decorations some users have around their profile picture",
+    "type": "declutter"
 }

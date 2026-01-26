@@ -6,5 +6,6 @@
         "Now always visible at the bottom of the screen instead of having to scroll",
         "Aligned with user panels and chat bar at the bottom of the screen"
     ],
+    "type": "improvement",
     "preview": "preview.png"
 }

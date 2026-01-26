@@ -3,5 +3,6 @@
     "description": [
         "Colors the mention based on the color of the first role mention to appear."
     ],
+    "type": "improvement",
     "preview": "preview.png"
 }
