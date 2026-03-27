@@ -2,7 +2,7 @@
   "name": "discord-css-snippets",
   "private": true,
   "author": "TheLazySquid",
-  "type": "module",
+  "category": "module",
   "version": "0.0.1",
   "scripts": {
     "dev": "astro dev",

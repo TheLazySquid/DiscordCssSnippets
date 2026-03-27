@@ -4,7 +4,7 @@
     import ClipboardCopy from "@lucide/svelte/icons/clipboard-copy";
     import Eye from "@lucide/svelte/icons/eye";
     import toast, { Toaster } from "svelte-french-toast";
-    import { categoryNames, siteUrl } from "$lib/consts";
+    import { categoryOrder, siteUrl } from "$lib/consts";
     import Css from "$lib/modals/Css.svelte";
     import { modalState } from "$lib/modals/state.svelte";
     import Preview from "$lib/modals/Preview.svelte";
@@ -22,20 +22,31 @@
     let enabledSnippets = $derived(snippets.filter(s => enabled[s.name]));
     let shownCategories = $derived.by(() => {
         const searched = search.toLowerCase();
-        if(searched === "") return categories;
 
-        // Show categories that have at least one snippet matching the search
-        const newCategories: Category[] = [];
+        // Get all the categories, prioritize ones defined in categoryOrder
+        const order = [...categoryOrder];
+
         for(const category of categories) {
-            const filtered = category.snippets.filter(s => (
-                s.name.toLowerCase().includes(searched)
-            ));
+            if(order.includes(category.name)) continue;
+            order.push(category.name);
+        }
+        
+        // Show categories that have at least one snippet matching the search
+        const newCategores: Category[] = [];
+        for(const categoryName of order) {
+            const category = categories.find(c => c.name === categoryName);
+            if(!category) continue;
 
-            if(filtered.length === 0) continue;
-            newCategories.push({ type: category.type, snippets: filtered });
+            const matchingSnippets = category.snippets.filter(s => s.name.toLowerCase().includes(searched));
+            if(matchingSnippets.length === 0) continue;
+
+            newCategores.push({
+                name: category.name,
+                snippets: matchingSnippets
+            });
         }
 
-        return newCategories;
+        return newCategores;
     });
 
     $effect(() => { localStorage.enabledSnippets = JSON.stringify(enabled) });
@@ -86,7 +97,7 @@
             {/if}
             {#each shownCategories as category}
                 <h2 class="text-3xl font-bold border-b">
-                    {categoryNames[category.type]}
+                    {category.name}
                 </h2>
                 <div class="grid gap-4 py-3 pr-2"
                     style="grid-template-columns: repeat(auto-fill, minmax(320px, 1fr))">

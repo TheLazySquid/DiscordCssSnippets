@@ -1,0 +1,9 @@
+{
+    "author": "gh0stp4wz",
+    "description": [
+        "Floats your messages to the right, Like in Telegram!",
+        "This snippet requries ThemeAttributes to be enabled"
+    ],
+    "category": "Stylize",
+    "preview": "preview.png"
+}

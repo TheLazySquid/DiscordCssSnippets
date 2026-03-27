@@ -3,6 +3,6 @@
     "description": [
         "Gives audio attachments a style closer to Voice Messages / Audio files on mobile"
     ],
-    "type": "improvement",
+    "category": "Improvement",
     "preview": "preview.mp4"
 }

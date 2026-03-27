@@ -1,6 +1,6 @@
 import { readdir, readFile } from "node:fs/promises";
 import { join } from "node:path";
-import type { SnippetType, Category, Snippet } from "./types";
+import type { Category, Snippet } from "./types";
 
 export const snippetsDir = join(import.meta.dirname, "..", "..", "..", "snippets");
 
@@ -20,7 +20,7 @@ export async function readSnippet(name: string): Promise<Snippet> {
         description,
         author: meta.author,
         preview: meta.preview,
-        type: meta.type
+        category: meta.category
     };
 }
 
@@ -31,15 +31,15 @@ export async function readSnippets() {
 
 export async function readCategories() {
     const snippets = await readSnippets();
-    const categories: Partial<Record<SnippetType, Category>> = {};
+    const categories: Partial<Record<string, Category>> = {};
 
     for(const snippet of snippets) {
-        categories[snippet.type] ??= {
-            type: snippet.type,
+        categories[snippet.category] ??= {
+            name: snippet.category,
             snippets: []
         };
 
-        categories[snippet.type]!.snippets.push(snippet);
+        categories[snippet.category]!.snippets.push(snippet);
     }
 
     return {
