@@ -1,4 +1,5 @@
 {
+    "$schema": "../../schema.json",
     "author": "gh0stp4wz",
     "description": [
         "Floats your messages to the right, Like in Telegram!",

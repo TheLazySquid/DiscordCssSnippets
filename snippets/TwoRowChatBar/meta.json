@@ -1,4 +1,5 @@
 {
+    "$schema": "../../schema.json",
     "author": "dav",
     "description": [
         "For those who may want the two-row chat bar layout in the event the visual refresh exp. gets removed.",

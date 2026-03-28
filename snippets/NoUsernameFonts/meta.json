@@ -1,4 +1,5 @@
 {
+    "$schema": "../../schema.json",
     "author": "TheLazySquid",
     "description": "Hides the custom fonts that some usernames have",
     "category": "Declutter"

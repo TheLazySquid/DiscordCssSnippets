@@ -1,4 +1,5 @@
 {
+    "$schema": "../../schema.json",
     "author": "TheLazySquid",
     "description": "Removes the effects that appear when you click on Nitro users' profiles",
     "category": "Declutter"

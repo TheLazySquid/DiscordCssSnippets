@@ -1,8 +1,7 @@
 {
+    "$schema": "../../schema.json",
     "author": "dav",
-    "description": [
-        "Gives audio attachments a style closer to Voice Messages / Audio files on mobile"
-    ],
+    "description": "Gives audio attachments a style closer to Voice Messages / Audio files on mobile",
     "category": "Improvement",
     "preview": "preview.mp4"
 }

@@ -1,8 +1,7 @@
 {
+    "$schema": "../../schema.json",
     "author": "gh0stp4wz",
-    "description": [
-        "Modifies the appearance of plain links to look more like a channel/user mention."
-    ],
+    "description": "Modifies the appearance of plain links to look more like a channel/user mention.",
     "category": "Stylize",
     "preview": "preview.png"
 }

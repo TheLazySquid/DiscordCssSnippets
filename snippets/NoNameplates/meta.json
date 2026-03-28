@@ -1,4 +1,5 @@
 {
+    "$schema": "../../schema.json",
     "author": "TheLazySquid",
     "description": "Hides the decorative nameplates in the members list",
     "category": "Declutter"

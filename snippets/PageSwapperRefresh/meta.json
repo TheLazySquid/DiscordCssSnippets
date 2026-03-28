@@ -1,4 +1,5 @@
 {
+    "$schema": "../../schema.json",
     "author": "dav",
     "description": [
         "Small redesign to the page swapper in search results",

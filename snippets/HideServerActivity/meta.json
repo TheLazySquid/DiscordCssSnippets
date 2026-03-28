@@ -1,8 +1,7 @@
 {
+    "$schema": "../../schema.json",
     "author": "TheLazySquid",
-    "description": [
-        "Hides the activity section at the top of the members list in servers."
-    ],
+    "description": "Hides the activity section at the top of the members list in servers.",
     "category": "Declutter",
     "preview": "preview.png"
 }

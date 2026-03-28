@@ -1,8 +1,7 @@
 {
+    "$schema": "../../schema.json",
     "author": "dav",
-    "description": [
-        "Alternate layout that hides panel buttons to offer more room for other content."
-    ],
+    "description": "Alternate layout that hides panel buttons to offer more room for other content.",
     "category": "Improvement",
     "preview": "preview.mp4"
 }

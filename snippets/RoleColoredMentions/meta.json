@@ -1,8 +1,7 @@
 {
+    "$schema": "../../schema.json",
     "author": "dav",
-    "description": [
-        "Colors the mention based on the color of the first role mention to appear."
-    ],
+    "description": "Colors the mention based on the color of the first role mention to appear.",
     "category": "Improvement",
     "preview": "preview.png"
 }

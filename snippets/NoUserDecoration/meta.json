@@ -1,4 +1,5 @@
 {
+    "$schema": "../../schema.json",
     "author": "TheLazySquid",
     "description": "Hides the decorations some users have around their profile picture",
     "category": "Declutter"

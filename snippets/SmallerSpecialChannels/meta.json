@@ -1,8 +1,7 @@
 {
+    "$schema": "../../schema.json",
     "author": "TheLazySquid",
-    "description": [
-        "Makes special channels such as the server guide or channel browser smaller"
-    ],
+    "description": "Makes special channels such as the server guide or channel browser smaller",
     "category": "Declutter",
     "preview": "preview.png"
 }

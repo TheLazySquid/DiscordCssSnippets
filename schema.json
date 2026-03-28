@@ -1,0 +1,29 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "https://thelazysquid.github.io/DiscordCssSnippets/snippet.schema.json",
+    "title": "Snippet",
+    "description": "A CSS snippet for discord",
+    "type": "object",
+    "required": ["author", "description", "category"],
+    "properties": {
+        "author": {
+            "type": "string",
+            "description": "The author of the snippet"
+        },
+        "description": {
+            "type": ["array", "string"],
+            "items": {
+                "type": "string"
+            },
+            "description": "A description of the snippet"
+        },
+        "category": {
+            "type": "string",
+            "description": "The category of the snippet"
+        },
+        "preview": {
+            "type": "string",
+            "description": "The relative file name of a preview image/video for a snippet"
+        }
+    }
+}
