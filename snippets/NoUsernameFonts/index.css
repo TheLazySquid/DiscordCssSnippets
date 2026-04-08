@@ -1,3 +1,16 @@
 [class*="dnsFont_"] {
     font-family: unset;
 }
+
+.innerContainer_dfb989 {
+    -webkit-text-stroke-color: unset !important;
+    -webkit-text-stroke-width: unset !important;
+}
+
+.glowContainer_dfb989 {
+    display: none;
+}
+
+.neon_dfb989 {
+    animation: none !important;
+}
