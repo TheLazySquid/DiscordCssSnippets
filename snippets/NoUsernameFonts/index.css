@@ -14,3 +14,11 @@
 .neon_dfb989 {
     animation: none !important;
 }
+
+.toon_dfb989:before {
+    display: none;
+}
+
+.toon_dfb989 {
+    color: unset !important;
+}
