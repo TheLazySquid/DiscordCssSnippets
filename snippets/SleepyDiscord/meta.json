@@ -1,0 +1,6 @@
+{
+    "$schema": "../../schema.json",
+    "author": "GillianMC",
+    "description": "Automatically dim non-hovered elements to prevent OLED burn-in",
+    "category": "Stylize"
+}

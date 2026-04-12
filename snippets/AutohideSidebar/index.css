@@ -1,0 +1,94 @@
+/* hovering mouse to the left of the profile fly-out is glitchy, i know that but i don't think there's any easy way to fix that without code */
+
+/* set collapsed state for channel list */
+div[class*="sidebarList"] {
+    width: 300px;
+    margin-left: -300px;
+    opacity: 0;
+    transition: margin-left 0.3s ease-out 0.3s, opacity 0.3s 0.3s;
+}
+
+/* set the user flyout*/
+section[class*="panels"]:has(div[class*="container"] > div[class*="buttons"] > div[class*="micButton"]) {
+    opacity: 0; 
+    pointer-events: none;
+    transition: opacity 0.3s ease-out 0.3s;
+}
+
+/* set the collapsed state for the server sidebar */
+nav[class*="guilds"] {
+    width: 72px;
+    margin-left: -62px;
+    opacity: 0.2;
+    z-index: 10;
+    transition: margin-left 0.3s ease-out 0.3s, opacity 0.3s 0.3s;
+    overflow: visible !important;
+}
+
+/* expand the server sidebar */
+nav[class*="guilds"]:hover {
+    margin-left: 0px;
+    opacity: 1;
+    transition: margin-left 0.2s ease-out 0s, opacity 0.2s 0s;
+}
+
+/* collapse the pill */
+nav[class*="guilds"]:not(:hover) div[class*="pill"] {
+    transform: translateX(62px) !important;
+    transition: transform 0.3s ease-out 0.3s;
+}
+
+/* show the pill */
+nav[class*="guilds"]:not(:hover) div[class*="pill"] span {
+    opacity: 1 !important;
+}
+
+/* return to original pill */
+nav[class*="guilds"]:hover div[class*="pill"] span {
+    transition: background-color 0.2s ease-out 0s;
+}
+
+/* add the ping color to the pill */
+nav[class*="guilds"]:not(:hover) :is(div[class*="listItem"], div[class*="folderGroup"]):has(div[class*="lowerBadge"]) div[class*="pill"] span {
+    background-color: var(--status-danger) !important;
+    transition: background-color 0.3s ease-out 0.3s; 
+}
+
+/* hide cuz they break the anim */
+div[class*="tooltip"]:has(> div[class*="tooltipContent"] > div[class*="guildTooltipWrapper"]) {
+  display: none !important;
+}
+
+/* might interfere with unrelated tooltips, keep the pointer-events */
+div[class*="tooltip"]:has(> div[class*="tooltipContent"] > div[class*="listItemTooltipContent"]) {
+  pointer-events: none !important;
+}
+
+div[class*="sidebarResizeHandle"] {
+  display: none !important;
+  pointer-events: none !important;
+
+}
+
+/* expand and persist logic
+
+/* you can also add:
+
+div[id*="popout"] > div[class*="animatorTop"] > div[id*="context"],
+div[class*="clickTrapContainer"] > div > div[id*="context"]
+
+to support context menus, but elements will expand with other context menus aswell
+*/
+
+body:has(
+    nav[class*="guilds"]:hover,
+    div[class*="sidebarList"]:hover,
+    section[class*="panels"]:hover,
+    div[id*="popout"] > div[class*="animatorTop"] > div[class*="popoutContainer"] > div[class*="user-profile-popout"]
+)
+:is(div[class*="sidebarList"], section[class*="panels"]:has(div[class*="container"] > div[class*="buttons"] > div[class*="micButton"])) {
+    margin-left: 0px;
+    opacity: 1;
+    pointer-events: auto;
+    transition: margin-left 0.3s ease-out 0.05s, opacity 0.3s 0.05s;
+}
