@@ -1,10 +1,10 @@
-import { getSnippetNames, snippetsDir } from "$lib/util";
+import { getSnippetNames, snippetsDir } from "$lib/snippets";
 import type { APIRoute, GetStaticPaths } from "astro";
 import { readFile } from "node:fs/promises";
 import { join } from "node:path";
 
 export const getStaticPaths: GetStaticPaths = async () => {
-    const snippets = await getSnippetNames();
+    const snippets = await getSnippetNames(true);
     return snippets.map(snippet => ({
         params: {
             snippet

@@ -1,0 +1,84 @@
+/* Sidebar/Channel List */
+div[class*="sidebarList"] {
+    width: 300px;
+    margin-left: -300px;
+    opacity: 0;
+    filter: grayscale(30%);
+    transition: margin-left 0.3s ease-out 0.3s, opacity 0.3s 0.3s, filter 0.3s;
+}
+
+/* User Panels */
+section[class*="panels"]:has(div[class*="container"] > div[class*="buttons"] > div[class*="micButton"]) {
+    opacity: 0; 
+    pointer-events: auto;
+    filter: grayscale(30%);
+    transition: opacity 0.3s ease-out 0.3s, filter 0.3s;
+}
+
+/* Guild/Server List */
+nav[class*="guilds"] {
+    width: 72px;
+    margin-left: -62px;
+    opacity: 0.2;
+    z-index: 10;
+    filter: grayscale(30%);
+    transition: margin-left 0.3s ease-out 0.3s, opacity 0.3s 0.3s, filter 0.3s;
+    overflow: visible !important;
+}
+
+/* Main Chat Content & Members List */
+:is([class*="chatContent"], [class*="membersWrap"], [class*="subtitleContainer"], [class*="bar"]) {
+    opacity: 0.7;
+    filter: grayscale(30%);
+    transition: opacity 0.5s ease, filter 0.5s ease;
+}
+
+
+/* Expand Sidebar on Hover */
+nav[class*="guilds"]:hover,
+body:has(nav[class*="guilds"]:hover, div[class*="sidebarList"]:hover, section[class*="panels"]:hover) 
+:is(div[class*="sidebarList"], section[class*="panels"]) {
+    margin-left: 0px !important;
+    opacity: 1 !important;
+    filter: grayscale(0%) !important;
+    pointer-events: auto;
+    transition: margin-left 0.3s ease-out 0s, opacity 0.3s 0s, filter 0.1s !important;
+}
+
+/* Wake specific elements on hover */
+:is([class*="chatContent"], [class*="membersWrap"], [class*="subtitleContainer"], [class*="bar"], nav[class*="guilds"]):hover {
+    opacity: 1 !important;
+    filter: grayscale(0%) !important;
+    transition: opacity 0.15s ease !important;
+}
+
+body:has(div[id*="popout"] [class*="user-profile-popout"]) 
+:is(div[class*="sidebarList"], section[class*="panels"]) {
+    margin-left: 0px !important;
+    opacity: 1 !important;
+    filter: grayscale(0%) !important;
+    pointer-events: auto;
+}
+
+
+#app-mount:not(:hover) [class*="guilds"], [class*="sidebar"], [class*="membersWrap"]) {
+    opacity: 0.5;
+    filter: grayscale(60%);
+    transition: opacity 1s ease;
+}
+
+#app-mount:not(:hover) :is([class*="chatContent"]) {
+    opacity: 0.9;
+    transition: opacity 1s ease;
+}
+
+/* Pill Logic */
+nav[class*="guilds"]:not(:hover) div[class*="pill"] { transform: translateX(62px) !important; transition: transform 0.3s ease-out 0.3s; }
+nav[class*="guilds"]:not(:hover) div[class*="pill"] span { opacity: 1 !important; }
+nav[class*="guilds"]:not(:hover) :is(div[class*="listItem"], div[class*="folderGroup"]):has(div[class*="lowerBadge"]) div[class*="pill"] span {
+    background-color: var(--status-danger) !important;
+}
+
+/* Hide breaking tooltips and resize handles */
+div[class*="tooltip"]:has(> div[class*="tooltipContent"] > :is(div[class*="guildTooltipWrapper"], div[class*="listItemTooltipContent"])) { display: none !important; }
+div[class*="sidebarResizeHandle"] { display: none !important; }

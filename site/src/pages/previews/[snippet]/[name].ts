@@ -1,4 +1,4 @@
-import { readSnippets, snippetsDir } from "$lib/util";
+import { readSnippets, snippetsDir } from "$lib/snippets";
 import type { APIRoute, GetStaticPaths } from "astro";
 import { readFile } from "node:fs/promises";
 import { join } from "node:path";

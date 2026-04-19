@@ -1,11 +1,12 @@
 ---
-import { readCategories } from "$lib/util";
+import { readCategories, readRemaps } from "$lib/snippets";
 import Selector from "$lib/select/Selector.svelte";
 import Layout from "$lib/Layout.astro";
 
 const { categories, snippets } = await readCategories();
+const remaps = await readRemaps();
 ---
 
 <Layout title="Discord CSS Snippets" description="A collection of css snippets to alter Discord's UI">
-    <Selector client:only="svelte" categories={categories} snippets={snippets} />
+    <Selector client:only="svelte" {categories} {snippets} {remaps} />
 </Layout>

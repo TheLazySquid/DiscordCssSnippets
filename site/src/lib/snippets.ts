@@ -1,0 +1,57 @@
+import { readdir, readFile } from "node:fs/promises";
+import { join } from "node:path";
+import type { Category, Snippet } from "./types";
+
+export const snippetsDir = join(import.meta.dirname, "..", "..", "..", "snippets");
+
+export async function readRemaps() {
+    const names = await getSnippetNames(true);
+    return names.filter(n => n.includes("+")).map(n => n.split("+"));
+}
+
+export async function getSnippetNames(remaps = false) {
+    const names = await readdir(snippetsDir);
+
+    if(remaps) return names;
+    return names.filter(name => !name.includes("+"));
+}
+
+export async function readSnippet(name: string): Promise<Snippet> {
+    const metaPath = join(snippetsDir, name, "meta.json");
+    const metaContent = await readFile(metaPath);
+    const meta = JSON.parse(metaContent.toString());
+
+    const description = Array.isArray(meta.description) ? meta.description : [meta.description];
+
+    return {
+        name,
+        description,
+        author: meta.author,
+        preview: meta.preview,
+        category: meta.category
+    };
+}
+
+export async function readSnippets() {
+    const snippets = await getSnippetNames();
+    return Promise.all(snippets.map(readSnippet));
+}
+
+export async function readCategories() {
+    const snippets = await readSnippets();
+    const categories: Partial<Record<string, Category>> = {};
+
+    for(const snippet of snippets) {
+        categories[snippet.category] ??= {
+            name: snippet.category,
+            snippets: []
+        };
+
+        categories[snippet.category]!.snippets.push(snippet);
+    }
+
+    return {
+        categories: Object.values(categories) as Category[],
+        snippets
+    }
+}

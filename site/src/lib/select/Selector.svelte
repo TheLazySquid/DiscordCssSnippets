@@ -8,13 +8,15 @@
     import Css from "$lib/modals/Css.svelte";
     import { modalState } from "$lib/modals/state.svelte";
     import Preview from "$lib/modals/Preview.svelte";
+    import { englishList } from "$lib/util";
 
     interface Props {
         categories: Category[];
         snippets: Snippet[];
+        remaps: string[][];
     }
 
-    let { categories, snippets }: Props = $props();
+    let { categories, snippets, remaps }: Props = $props();
     
     const storedEnabled = localStorage.enabledSnippets || "{}";
     let enabled: Record<string, boolean> = $state(JSON.parse(storedEnabled));
@@ -51,11 +53,54 @@
 
     $effect(() => { localStorage.enabledSnippets = JSON.stringify(enabled) });
 
+    function getSnippetCss(...snippets: Snippet[]) {
+        if(snippets.length === 1) {
+            return `/* ${snippets[0].name} by ${snippets[0].author} */\n` +
+                `@import url(${siteUrl}css/${snippets[0].name}.css);`;
+        }
+
+        const singleAuthor = snippets.every(s => s.author === snippets[0].author);
+        const names = snippets.map(s => s.name);
+        
+        // If all the snippets are by the same author only show it once at the end
+        let comment: string;
+        if(singleAuthor) {
+            comment = `/* ${englishList(names)} by ${snippets[0].author} */\n`;
+        } else {
+            const namesAndAuthors = snippets.map(s => `${s.name} by ${s.author}`);
+            comment = `/* ${englishList(namesAndAuthors)} */\n`;
+        }
+
+        return comment + `@import url(${siteUrl}css/${names.join("+")}.css);`;
+    }
+
     function getCss() {
-        return enabledSnippets.map(s => (
-            `/* ${s.name} by ${s.author} */\n` +
-            `@import url(${siteUrl}css/${s.name}.css);`
-        )).join("\n");
+        const imports: string[] = [];
+
+        // Add remapped snippets separately
+        const remapped = new Set<Snippet>();
+        for(const remap of remaps) {
+            if(!remap.every(name => enabled[name])) continue;
+            
+            const remappedSnippets: Snippet[] = [];
+            for(const name of remap) {
+                const snippet = snippets.find(s => s.name === name);
+                if(!snippet) continue;
+
+                remappedSnippets.push(snippet);
+                remapped.add(snippet);
+            }
+
+            imports.push(getSnippetCss(...remappedSnippets));
+        }
+
+        // Add non-remapped snippets
+        for(const snippet of enabledSnippets) {
+            if(remapped.has(snippet)) continue;
+            imports.push(getSnippetCss(snippet));
+        }
+
+        return imports.join("\n");
     }
 
     function copy() {
