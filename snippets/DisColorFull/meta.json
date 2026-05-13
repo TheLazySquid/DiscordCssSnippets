@@ -1,0 +1,7 @@
+{
+    "$schema": "../../schema.json",
+    "author": "Zacam",
+    "description": "Fills in Discords bland SVGs with Color/Colorized Versions",
+    "category": "Stylize",
+    "preview": "preview.png"
+}
