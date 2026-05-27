@@ -7,6 +7,12 @@ This is a collection of CSS snippets that alter the way Discord looks in relativ
 
 ## Usage
 
+### CssSnippetRepo
+
+If you're using [BetterDiscord](https://betterdiscord.app) or [BDVencord](https://github.com/TheLazySquid/BDVencord) you can install the [CssSnippetRepo](https://betterdiscord.app/plugins/CssSnippetRepo) plugin, which will add a palette button to the top right of the screen. Pressing this button will allow you to easily browse and toggle snippets.
+
+### Manual
+
 Head to [the site](https://thelazysquid.github.io/DiscordCssSnippets/) and select the snippets you want to use. Then, click the copy button in the top right to copy the css.
 
 There are several ways you can load this css:
