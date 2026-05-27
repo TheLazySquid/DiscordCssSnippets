@@ -1,6 +1,6 @@
 {
     "$schema": "../../schema.json",
-    "author": "GH0STP4WZ",
+    "author": "gh0stp4wz",
     "description": "flips the discord layout from left to right",
     "category": "Stylize",
     "preview": "preview.png"
