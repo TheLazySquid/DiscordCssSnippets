@@ -2,7 +2,10 @@ import { readdir, readFile } from "node:fs/promises";
 import { join } from "node:path";
 import type { Category, Snippet } from "./types";
 
-export const snippetsDir = join(import.meta.dirname, "..", "..", "..", "snippets");
+const dirname = import.meta.dirname;
+const basePath = dirname.slice(0, dirname.indexOf("site"));
+
+export const snippetsDir = join(basePath, "snippets");
 
 export async function readRemaps() {
     const names = await getSnippetNames(true);
