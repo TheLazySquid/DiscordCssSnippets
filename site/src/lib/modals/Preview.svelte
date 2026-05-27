@@ -10,6 +10,7 @@
         <h2 class="text-2xl font-bold mb-2 border-b border-gray-400">{snippet.name} Preview</h2>
         {#if modalState.preview.preview.endsWith(".mp4")}
             <video
+                class="max-h-[80vh] max-w-[80vw]"
                 src={`${baseUrl}previews/${snippet.name}/${snippet.preview}`}
                 autoplay
                 loop
@@ -17,6 +18,7 @@
             ></video>
         {:else}
             <img
+                class="max-h-[80vh] max-w-[80vw]"
                 src={`${baseUrl}previews/${snippet.name}/${snippet.preview}`}
                 alt={`A preview of ${snippet.name}`}
             />
