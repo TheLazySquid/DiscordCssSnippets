@@ -14,31 +14,36 @@ const snippet = await readSnippet(name);
 
 <Layout title={snippet.name} description={snippet.description[0]}>
     <div class="flex flex-col items-center pt-3">
-        <div class="bg-foreground rounded-lg p-4" style="width: min(720px, 90%)">
-            <div class="text-4xl font-bold mb-2 border-b border-gray-400">
-                {snippet.name}
+        <div style="width: min(720px, 90%)">
+            <a href="/DiscordCssSnippets" class="block text-sm pb-2">
+                &lt; View all snippets
+            </a>
+            <div class="bg-foreground rounded-lg p-4">
+                <div class="text-4xl font-bold mb-2 border-b border-gray-400">
+                    {snippet.name}
+                </div>
+                <div class="text-sm mb-4">
+                    By {snippet.author}
+                </div>
+                {snippet.description.map((line) => (
+                    <p class="mb-2">{line}</p>
+                ))}
+                {snippet.preview && (
+                    snippet.preview.endsWith(".mp4") ? (
+                        <video
+                            src={`${baseUrl}previews/${snippet.name}/${snippet.preview}`}
+                            autoplay 
+                            loop
+                            muted
+                        ></video>
+                    ) : (
+                        <img
+                            src={`${baseUrl}previews/${snippet.name}/${snippet.preview}`}
+                            alt={`A preview of ${snippet.name}`}
+                        />
+                    )
+                )}
             </div>
-            <div class="text-sm mb-4">
-                By {snippet.author}
-            </div>
-            {snippet.description.map((line) => (
-                <p class="mb-2">{line}</p>
-            ))}
-            {snippet.preview && (
-                snippet.preview.endsWith(".mp4") ? (
-                    <video
-                        src={`${baseUrl}previews/${snippet.name}/${snippet.preview}`}
-                        autoplay 
-                        loop
-                        muted
-                    ></video>
-                ) : (
-                    <img
-                        src={`${baseUrl}previews/${snippet.name}/${snippet.preview}`}
-                        alt={`A preview of ${snippet.name}`}
-                    />
-                )
-            )}
         </div>
     </div>
 </Layout>
