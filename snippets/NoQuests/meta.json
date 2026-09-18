@@ -1,0 +1,6 @@
+{
+    "$schema": "../../schema.json",
+    "author": "TheLazySquid",
+    "description": "Hides the quest notification above the user area",
+    "category": "Declutter"
+}
